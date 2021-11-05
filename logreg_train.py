@@ -16,7 +16,7 @@ def std_scaler(x):
     return (x - x.mean(axis=0)) / x.std(axis=0)
 
 
-def gradient_descent(x, y, epochs, learning_rate, eps):
+def gradient_descent(x, y, epochs, lr, eps):
     theta = np.zeros((1, x.shape[1]))
     size = len(x)
     loss_prev = 1
@@ -24,11 +24,11 @@ def gradient_descent(x, y, epochs, learning_rate, eps):
     
     i = 0
     while i < epochs:
-        sig = sigmoid(np.dot(theta, x.T))
-        derivative = derivative = (np.dot((sig - y.T), x)) / size
-        loss = (np.sum((y.T * np.log(sig)) + ((1 - y.T) * (np.log(1 - sig))))) / -size
+        p = sigmoid(theta @ x.T)
+        grad = (p - y.T) @ x / size
+        loss = np.sum(y.T * np.log(p) + (1 - y.T) * np.log(1 - p)) / -size
         losses.append(loss)
-        theta -= learning_rate * derivative
+        theta -= lr * grad
         i += 1
         if abs(loss - loss_prev) < eps:
             break

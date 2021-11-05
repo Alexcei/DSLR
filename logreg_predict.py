@@ -20,9 +20,9 @@ def predict(df, thetas):
     x = std_scaler(df.values)
     result = []
     for w in thetas.values:
-        sig = sigmoid(x.dot(w))
-        result.append(sig)
-        
+        p = sigmoid(x @ w)
+        result.append(p)
+
     result = [HOUSES[i] for i in np.argmax(result, axis=0)]
     return result
 
