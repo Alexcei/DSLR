@@ -1,5 +1,5 @@
 # DSLR
 school course 21
 
-Data Visualization
+Data Visualization  
 Logistic Regression
